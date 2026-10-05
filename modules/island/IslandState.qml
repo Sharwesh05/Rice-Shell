@@ -168,7 +168,6 @@ Singleton {
         { id: "region", icon: "screenshot_region", label: "Region", hint: "Select an area", cmd: `${ipcPrefix} capture region` },
         { id: "record", icon: "screen_record", label: "Record", hint: "Start / stop", cmd: `${ipcPrefix} capture record` },
         { id: "picker", icon: "colorize", label: "Colour", hint: "Pick from screen", cmd: `${ipcPrefix} capture pick` },
-        { id: "ocr", icon: "document_scanner", label: "Text", hint: "Copy text (OCR)", cmd: `${ipcPrefix} capture ocr` },
         { id: "clipboard", icon: "content_paste", label: "Clipboard", hint: "History", cmd: `${ipcPrefix} launcher clipboard` }
     ]
 

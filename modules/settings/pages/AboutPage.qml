@@ -298,7 +298,6 @@ SettingsPage {
                 model: [
                     { icon: "menu_book", text: "Quickshell docs", url: "https://quickshell.org/docs/" },
                     { icon: "water_drop", text: "Hyprland wiki", url: "https://wiki.hypr.land/" },
-                    { icon: "ac_unit", text: "NixOS search", url: "https://search.nixos.org/" },
                     { icon: "palette", text: "Material 3", url: "https://m3.material.io/" },
                     { icon: "format_paint", text: "matugen", url: "https://github.com/InioX/matugen" },
                     { icon: "folder_open", text: "Open rice folder", url: "file://" + Quickshell.shellDir }

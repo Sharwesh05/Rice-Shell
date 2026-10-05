@@ -1,7 +1,7 @@
 # Dotfiles
 
-Personal config, linked into `~/.config` by `./symlink`. Part of the nixos repo
-(`~/Modules/nixos/rice/Dotfiles`); it used to be github.com/Sharwesh05/Dotfiles.
+Personal config, linked into `~/.config` by `./symlink`. Part of the Rice-Shell repo
+(`~/Modules/Rice-Shell/Dotfiles`); it used to be github.com/Sharwesh05/Dotfiles.
 
 | Folder / file | What |
 |---|---|

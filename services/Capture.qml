@@ -7,13 +7,12 @@ import Quickshell.Hyprland
 import qs.config
 import qs.components
 
-// Screenshot / OCR / colour-picker / screen-recording front-end.
+// Screenshot / colour-picker / screen-recording front-end.
 //
 // A capture "session" shows the region selector overlay (modules/capture) on
 // every screen. The overlay freezes each output with a ScreencopyView, lets the
 // user pick a region / window / screen and then hands the result back here:
 //   - screenshot: the overlay crops the frozen frame into a PNG -> finishImage()
-//   - ocr:        same, into a temp file -> tesseract -> clipboard
 //   - pick:       the overlay reads the pixel -> finishPick()
 //   - record:     finishRecord() -> Recording.startScreen()
 //
@@ -23,7 +22,7 @@ Singleton {
 
     // ---- session state (read by the overlay) ----
     property bool active: false
-    // "screenshot" | "ocr" | "pick" | "record"
+    // "screenshot" | "pick" | "record"
     property string action: "screenshot"
     // "region" | "window" | "screen"
     property string mode: "region"
@@ -44,7 +43,6 @@ Singleton {
     // ---- preferences ----
     readonly property bool recordAudio: store.get("recordAudio", false)
     readonly property string lastMode: store.get("mode", "region")
-    readonly property string ocrLang: store.get("ocrLang", "eng")
 
     // ---- environment ----
     property var tools: ({})
@@ -66,10 +64,6 @@ Singleton {
     function begin(action, mode) {
         if (action === "record" && Recording.active) {
             Recording.stop();
-            return;
-        }
-        if (action === "ocr" && !has("tesseract") && toolsLoaded) {
-            notifyError("Text recognition unavailable", "Install <b>tesseract</b> to copy text from the screen.");
             return;
         }
         if (closing.running) {
@@ -104,10 +98,6 @@ Singleton {
     }
 
     function setAction(a) {
-        if (a === "ocr" && toolsLoaded && !has("tesseract")) {
-            notifyError("Text recognition unavailable", "Install <b>tesseract</b> to copy text from the screen.");
-            return;
-        }
         action = a;
     }
 
@@ -123,10 +113,7 @@ Singleton {
 
     // Called by the overlay with a PNG it cropped from the frozen frame.
     function finishImage(kind, path, width, height) {
-        if (kind === "ocr")
-            runOcr(path);
-        else
-            screenshotSaved(path, width, height);
+        screenshotSaved(path, width, height);
     }
 
     // Fallback when the overlay could not freeze the output: grab with grim
@@ -136,7 +123,7 @@ Singleton {
             notifyError("Screenshot failed", "Screen capture is unavailable and <b>grim</b> is not installed.");
             return;
         }
-        const path = kind === "ocr" ? `${tempDir}/ocr-${Date.now()}.png` : nextScreenshotPath();
+        const path = nextScreenshotPath();
         grimProc.kind = kind;
         grimProc.path = path;
         grimProc.size = [g.w, g.h];
@@ -206,16 +193,6 @@ Singleton {
             file: path,
             actions: actions
         });
-    }
-
-    function runOcr(path) {
-        if (!has("tesseract")) {
-            notifyError("Text recognition unavailable", "Install <b>tesseract</b> to copy text from the screen.");
-            return;
-        }
-        ocrProc.path = path;
-        ocrProc.command = ["sh", "-c", 'tesseract "$1" stdout -l "$2" 2>/dev/null; rc=$?; rm -f "$1"; exit $rc', "sh", path, ocrLang];
-        ocrProc.running = true;
     }
 
     function copyText(text) {
@@ -365,31 +342,12 @@ esac`;
     }
 
     Process {
-        id: ocrProc
-        property string path
-        stdout: StdioCollector { id: ocrOut }
-        onExited: code => {
-            const text = ocrOut.text.replace(/\f/g, "").trim();
-            if (code !== 0) {
-                root.notifyError("Text recognition failed", `tesseract exited with ${code}. Is the <b>${root.ocrLang}</b> language installed?`);
-            } else if (!text) {
-                root.notify({ app: "Text recognition", summary: "No text found", body: "Try selecting a larger or sharper area.", transient: true });
-            } else {
-                root.copyText(text);
-                const preview = text.length > 160 ? text.slice(0, 160) + "…" : text;
-                const words = text.split(/\s+/).filter(w => w).length;
-                root.notify({ app: "Text recognition", summary: `Copied ${words} word${words === 1 ? "" : "s"}`, body: root.escapeHtml(preview), transient: true });
-            }
-        }
-    }
-
-    Process {
         id: mkdirProc
     }
 
     Process {
         id: toolsProc
-        command: ["sh", "-c", "for b in grim wl-copy notify-send tesseract satty swappy wf-recorder gpu-screen-recorder pw-record pactl wpctl xdg-open hyprctl; do command -v \"$b\" >/dev/null 2>&1 && echo \"$b\"; done"]
+        command: ["sh", "-c", "for b in grim wl-copy notify-send satty swappy wf-recorder gpu-screen-recorder pw-record pactl wpctl xdg-open hyprctl; do command -v \"$b\" >/dev/null 2>&1 && echo \"$b\"; done"]
         stdout: StdioCollector {
             onStreamFinished: {
                 const t = {};
@@ -426,7 +384,6 @@ esac`;
         function window(): void { root.begin("screenshot", "window"); }
         // Instant capture of the focused output, no selector.
         function screen(): void { root.captureOutput(""); }
-        function ocr(): void { root.begin("ocr", "region"); }
         function pick(): void { root.begin("pick", "region"); }
         // Toggle a full-screen recording of the focused output.
         function record(): void {

@@ -11,7 +11,7 @@ Singleton {
     // Dotfiles repo (symlinked into ~/.config). Generated app themes and
     // autostart entries are written here. The `rice` wrapper exports
     // RICE_DOTFILES by resolving the ~/.config/hypr link.
-    readonly property string dotfiles: Quickshell.env("RICE_DOTFILES") || `${home}/Modules/nixos/rice/Dotfiles`
+    readonly property string dotfiles: Quickshell.env("RICE_DOTFILES") || `${home}/Modules/Rice-Shell/Dotfiles`
 
     readonly property string state: `${stateHome}/rice`
     readonly property string settingsFile: `${state}/settings.json`

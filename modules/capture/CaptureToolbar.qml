@@ -71,7 +71,6 @@ Rectangle {
             accentFg: root.recording ? Theme.errorContainerFg : Theme.primaryContainerFg
             model: [
                 { id: "screenshot", icon: "screenshot_region", label: "Screenshot", key: "C" },
-                { id: "ocr", icon: "document_scanner", label: "Text", key: "T", enabled: !Capture.toolsLoaded || Capture.has("tesseract") },
                 { id: "record", icon: "videocam", label: "Record", key: "V", enabled: !Capture.toolsLoaded || Capture.has("wf-recorder") || Capture.has("gpu-screen-recorder") },
                 { id: "pick", icon: "colorize", label: "Colour", key: "P" }
             ]
@@ -130,13 +129,13 @@ Rectangle {
                 spacing: Tokens.space.s
 
                 Icon {
-                    text: root.recording ? "radio_button_checked" : Capture.action === "ocr" ? "content_copy" : "check"
+                    text: root.recording ? "radio_button_checked" : "check"
                     size: 20
                     fill: 1
                     color: confirm.content
                 }
                 StyledText {
-                    text: root.recording ? "Record" : Capture.action === "ocr" ? "Copy text" : "Capture"
+                    text: root.recording ? "Record" : "Capture"
                     font.weight: Font.DemiBold
                     color: confirm.content
                 }

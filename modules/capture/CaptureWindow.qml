@@ -619,7 +619,6 @@ PanelWindow {
             case Qt.Key_W: Capture.setMode("window"); break;
             case Qt.Key_S: Capture.setMode("screen"); break;
             case Qt.Key_C: Capture.setAction("screenshot"); break;
-            case Qt.Key_T: Capture.setAction("ocr"); break;
             case Qt.Key_V: Capture.setAction("record"); break;
             case Qt.Key_P: Capture.setAction("pick"); break;
             case Qt.Key_A: if (root.action === "record") Capture.setAudio(!Capture.recordAudio); break;
@@ -664,7 +663,7 @@ PanelWindow {
             cropper.busy = true;
             cropper.cropRect = Qt.rect(r.x, r.y, r.w, r.h);
             cropper.kind = k;
-            cropper.path = k === "ocr" ? `${Capture.tempDir}/ocr-${Date.now()}.png` : Capture.nextScreenshotPath();
+            cropper.path = Capture.nextScreenshotPath();
             cropTimer.restart();
         }
 

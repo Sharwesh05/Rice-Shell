@@ -7,8 +7,8 @@ rice ipc show                          # list every target and function
 rice ipc call <target> <function> [args…]
 ```
 
-`rice` is the wrapper installed by `rice.nix` (`qs -c rice`). When running from the repo with
-`qs -p ~/Modules/nixos/rice`, use `qs -p ~/Modules/nixos/rice ipc call …` instead.
+`rice` is the wrapper script (`~/.local/bin/rice`, `qs -c rice`). When running from the repo with
+`qs -p ~/Modules/Rice-Shell`, use `qs -p ~/Modules/Rice-Shell ipc call …` instead.
 
 | Target | Functions |
 |---|---|
@@ -24,7 +24,7 @@ rice ipc call <target> <function> [args…]
 | `dock` | `toggle` `toggleAutohide` `pin <id>` `unpin <id>` `list` |
 | `desktop` | `editToggle` `edit <bool>` `toggle` `show` `hide` `add <type>` `types` `reset` `resetAll` `isEditing` |
 | `todo` | `add <text>` `list` `clearDone` |
-| `capture` | `region` `window` `screen` `screenshot` `ocr` `pick` `record` `recordRegion` `recordAudio` `recordMic` `stop` `cancel` `setAudio <bool>` `status` |
+| `capture` | `region` `window` `screen` `screenshot` `pick` `record` `recordRegion` `recordAudio` `recordMic` `stop` `cancel` `setAudio <bool>` `status` |
 | `wallpaper` | `set <path>` `random` `get` |
 | `avatar` | `set <image>` (copied to `~/.face`) `clear` `pick` (opens the picker) `get` |
 | `theme` | `toggleDark` `scheme <scheme-tonal-spot\|scheme-expressive\|scheme-vibrant\|…>` |

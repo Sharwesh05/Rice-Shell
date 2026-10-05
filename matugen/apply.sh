@@ -144,7 +144,7 @@ if has gtk; then
     gtk_theme=adw-gtk3
     [[ "$mode" == dark ]] && gtk_theme=adw-gtk3-dark
     mkdir -p "$conf/gtk-3.0"
-    # Keep the icon theme chosen in dconf (home.nix sets it) in GTK 3 too.
+    # Keep the icon theme chosen in dconf in GTK 3 too.
     dconf_icon_theme
     prefer_dark=0
     [[ "$mode" == dark ]] && prefer_dark=1

@@ -52,7 +52,7 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             spacing: Tokens.space.s
 
-            // Launcher button: NixOS snowflake (nixos-icons), tinted to the theme.
+            // Launcher button: snowflake (nixos-icons), tinted to the theme.
             IconButton {
                 id: launcherButton
                 readonly property string snowflake: Quickshell.iconPath("nix-snowflake-white", true)

@@ -2,7 +2,7 @@
 ---- RICE SHELL ----
 --------------------
 
--- Quickshell desktop shell from ~/Modules/nixos/rice (installed by rice.nix).
+-- Quickshell desktop shell from ~/Modules/Rice-Shell.
 -- Every panel is driven through `rice ipc call <target> <function>`;
 -- `rice ipc show` lists all targets.
 
@@ -55,7 +55,6 @@ hl.bind("Print",                        ipc("capture", "region"))
 hl.bind("SHIFT + Print",                ipc("capture", "screen"))
 hl.bind(mainMod .. " + SHIFT + X",      ipc("capture", "region"))
 hl.bind(mainMod .. " + SHIFT + W",      ipc("capture", "window"))
-hl.bind(mainMod .. " + SHIFT + O",      ipc("capture", "ocr"))
 hl.bind(mainMod .. " + SHIFT + C",      ipc("capture", "pick"))
 hl.bind(mainMod .. " + CTRL + R",       ipc("capture", "recordRegion"))
 hl.bind(mainMod .. " + ALT + R",        ipc("capture", "record"))

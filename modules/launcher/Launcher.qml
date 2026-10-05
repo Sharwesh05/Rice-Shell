@@ -58,7 +58,7 @@ PanelWindow {
         wallpapers: { id: "wallpapers", label: "Wallpapers", icon: "image", prefix: ":", placeholder: "Search wallpapers" },
         commands: { id: "commands", label: "Commands", icon: "terminal", prefix: ">", placeholder: "Search commands or type a shell command" },
         calc: { id: "calc", label: "Calculator", icon: "calculate", prefix: "=", placeholder: "2^10, sqrt(2), 10 km to mi, 100 usd to inr" },
-        web: { id: "web", label: "Web", icon: "travel_explore", prefix: "?", placeholder: "Search the web (yt, w, gh, nix… picks an engine)" },
+        web: { id: "web", label: "Web", icon: "travel_explore", prefix: "?", placeholder: "Search the web (yt, w, gh, maps… picks an engine)" },
         help: { id: "help", label: "Keys & help", icon: "keyboard", prefix: "!", placeholder: "Search keybinds, launcher tricks and rice commands" }
     })
     readonly property var railModes: ["apps", "files", "clipboard", "emoji", "wallpapers", "help"].map(m => modes[m])
@@ -534,7 +534,7 @@ PanelWindow {
             if (!Wallpapers.list.length) return { icon: "hide_image", title: "No wallpapers yet", subtitle: `Add images to ${FileSearch.prettyPath(Paths.wallpaperDir)}`, actionLabel: "Rescan" };
             return { icon: "search_off", title: "No matches", subtitle: `No wallpaper matches “${t}”` };
         case "web":
-            return { icon: "travel_explore", title: "Search the web", subtitle: "Type a query. Start with yt, w, gh, nix, maps or ddg to pick an engine." };
+            return { icon: "travel_explore", title: "Search the web", subtitle: "Type a query. Start with yt, w, gh, maps or ddg to pick an engine." };
         case "emoji":
             return { icon: "sentiment_dissatisfied", title: "No emoji found", subtitle: `Nothing matches “${t}”` };
         case "calc":

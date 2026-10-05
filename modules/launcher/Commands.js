@@ -57,8 +57,6 @@ var engines = [
     { key: "yt", name: "YouTube", icon: "smart_display", url: "https://www.youtube.com/results?search_query=%s" },
     { key: "w", name: "Wikipedia", icon: "menu_book", url: "https://en.wikipedia.org/w/index.php?search=%s" },
     { key: "gh", name: "GitHub", icon: "code", url: "https://github.com/search?q=%s&type=repositories" },
-    { key: "nix", name: "NixOS packages", icon: "deployed_code", url: "https://search.nixos.org/packages?channel=unstable&query=%s" },
-    { key: "nixopt", name: "NixOS options", icon: "settings_applications", url: "https://search.nixos.org/options?channel=unstable&query=%s" },
     { key: "maps", name: "Maps", icon: "map", url: "https://www.openstreetmap.org/search?query=%s" }
 ];
 

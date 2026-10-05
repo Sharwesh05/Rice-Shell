@@ -60,7 +60,6 @@ to open **Keys & help**. It's a searchable list of every Hyprland bind, launcher
 | Print, Super + Shift + X | Screenshot a region | `capture region` |
 | Shift + Print | Screenshot the whole screen (no overlay) | `capture screen` |
 | Super + Shift + W | Screenshot a window | `capture window` |
-| Super + Shift + O | OCR a region → clipboard | `capture ocr` |
 | Super + Shift + C | Colour picker → clipboard | `capture pick` |
 | Super + Ctrl + R | Record a region (again to stop) | `capture recordRegion` |
 | Super + Alt + R | Record the screen (again to stop) | `capture record` |

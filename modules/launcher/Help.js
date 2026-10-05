@@ -10,7 +10,7 @@ var prefixes = [
     { key: ":", mode: "wallpapers", title: "Wallpapers", subtitle: "Pick one; colours follow the wallpaper" },
     { key: ">", mode: "commands", title: "Commands", subtitle: "Built-in actions or any shell command" },
     { key: "=", mode: "calc", title: "Calculator", subtitle: "Math, units (10 km to mi) and currency (100 usd to inr)" },
-    { key: "?", mode: "web", title: "Web search", subtitle: "yt, w, gh, nix, maps or ddg picks an engine" },
+    { key: "?", mode: "web", title: "Web search", subtitle: "yt, w, gh, maps or ddg picks an engine" },
     { key: "!", mode: "help", title: "Keys & help", subtitle: "This list" }
 ];
 

@@ -10,7 +10,7 @@ import qs.components
 // adapter that rfkill has soft-blocked (e.g. airplane mode or a state
 // restored at boot), so clear the block first when switching on.
 // The chosen state is saved ($XDG_STATE_HOME/rice/bluetooth.json) and applied
-// again at login: NixOS powers the adapter on at every boot by default.
+// again at login: systemd may power the adapter on at every boot by default.
 Singleton {
     id: root
 

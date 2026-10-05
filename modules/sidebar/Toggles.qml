@@ -132,7 +132,6 @@ GridLayout {
         Action { icon: "screenshot_region"; onClicked: Panels.afterClose(() => Capture.begin("screenshot", "region")) }
         Action { icon: "screen_record"; onClicked: Panels.afterClose(() => Capture.begin("record", "region")) }
         Action { icon: "colorize"; onClicked: Panels.afterClose(() => Capture.begin("pick", "region")) }
-        Action { icon: "document_scanner"; onClicked: Panels.afterClose(() => Capture.begin("ocr", "region")) }
         Action { icon: "content_paste"; onClicked: Panels.openLauncher(";") }
         Action { icon: "mood"; onClicked: Panels.openLauncher(".") }
     }

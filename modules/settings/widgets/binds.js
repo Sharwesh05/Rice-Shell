@@ -64,7 +64,6 @@ const IPC_NAMES = {
     "capture.screen": "Screenshot whole screen",
     "capture.window": "Screenshot window",
     "capture.screenshot": "Screenshot",
-    "capture.ocr": "OCR text to clipboard",
     "capture.pick": "Colour picker",
     "capture.record": "Record screen (toggle)",
     "capture.recordRegion": "Record region (toggle)",

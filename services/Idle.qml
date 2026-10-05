@@ -23,6 +23,12 @@ Singleton {
     readonly property int suspendAfter: store.get("suspendAfter", 0)
     readonly property bool lockBeforeSleep: store.get("lockBeforeSleep", true)
 
+    // What logind does for the lid switch and power button.
+    readonly property string lidAction: store.get("lidAction", "suspend")
+    readonly property string lidExternalPowerAction: store.get("lidExternalPowerAction", "suspend")
+    readonly property string powerKeyAction: store.get("powerKeyAction", "poweroff")
+    readonly property string powerKeyLongPressAction: store.get("powerKeyLongPressAction", "poweroff")
+
     readonly property bool paused: Panels.caffeine
     readonly property bool idle: lock.isIdle || screenOff.isIdle || suspend.isIdle
     // Hyprland-only side effects (dpms, sleep inhibitor) are skipped elsewhere.
@@ -32,6 +38,20 @@ Singleton {
     function setLockAfter(s) { store.set("lockAfter", clamp(s)); }
     function setScreenOffAfter(s) { store.set("screenOffAfter", clamp(s)); }
     function setSuspendAfter(s) { store.set("suspendAfter", clamp(s)); }
+
+    // Rewrite /etc/systemd/logind.conf.d/rice.conf and restart logind so the
+    // new handlers take effect. pkexec prompts through the rice polkit agent.
+    function applyPowerPolicy() {
+        if (!root.live) return;
+        const conf = `[Login]\nHandleLidSwitch=${root.lidAction}\nHandleLidSwitchExternalPower=${root.lidExternalPowerAction}\nHandlePowerKey=${root.powerKeyAction}\nHandlePowerKeyLongPress=${root.powerKeyLongPressAction}\n`;
+        Quickshell.execDetached(["sh", "-c",
+            `printf '%s' '${conf}' > /tmp/rice-logind.conf && pkexec sh -c "mkdir -p /etc/systemd/logind.conf.d && cp /tmp/rice-logind.conf /etc/systemd/logind.conf.d/rice.conf && chmod 644 /etc/systemd/logind.conf.d/rice.conf && systemctl restart systemd-logind"`]);
+    }
+
+    function setLidAction(v) { store.set("lidAction", v); applyPowerPolicy(); }
+    function setLidExternalPowerAction(v) { store.set("lidExternalPowerAction", v); applyPowerPolicy(); }
+    function setPowerKeyAction(v) { store.set("powerKeyAction", v); applyPowerPolicy(); }
+    function setPowerKeyLongPressAction(v) { store.set("powerKeyLongPressAction", v); applyPowerPolicy(); }
 
     function clamp(s) {
         const n = Math.round(Number(s) || 0);
@@ -173,7 +193,10 @@ Singleton {
             return JSON.stringify({
                 enabled: root.enabled, paused: root.paused, idle: root.idle,
                 lockAfter: root.lockAfter, screenOffAfter: root.screenOffAfter,
-                suspendAfter: root.suspendAfter, lockBeforeSleep: root.lockBeforeSleep
+                suspendAfter: root.suspendAfter, lockBeforeSleep: root.lockBeforeSleep,
+                lidAction: root.lidAction, lidExternalPowerAction: root.lidExternalPowerAction,
+                powerKeyAction: root.powerKeyAction,
+                powerKeyLongPressAction: root.powerKeyLongPressAction
             });
         }
     }

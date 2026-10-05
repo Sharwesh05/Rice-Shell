@@ -45,7 +45,7 @@ Singleton {
         id: files
         command: ["sh", "-c",
             "d=\"${XDG_CONFIG_HOME:-$HOME/.config}/hypr\"; "
-            + "[ -d \"$d\" ] || d=\"${RICE_DOTFILES:-$HOME/Modules/nixos/rice/Dotfiles}/hypr\"; "
+            + "[ -d \"$d\" ] || d=\"${RICE_DOTFILES:-$HOME/Modules/Rice-Shell/Dotfiles}/hypr\"; "
             + "[ -d \"$d\" ] || exit 0; "
             + "find -L \"$d\" -maxdepth 3 -type f \\( -name '*.lua' -o -name '*.conf' \\) 2>/dev/null | sort | "
             + "while IFS= read -r f; do grep -qE 'hl\\.bind|^[[:space:]]*bind[a-z]*[[:space:]]*=' \"$f\" 2>/dev/null || continue; "

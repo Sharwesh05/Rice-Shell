@@ -301,6 +301,82 @@ SettingsPage {
         }
     }
 
+    // ---- Power buttons & lid -------------------------------------------------------
+    readonly property var powerActions: [
+        { value: "ignore", label: "Do nothing" },
+        { value: "lock", label: "Lock screen" },
+        { value: "suspend", label: "Suspend" },
+        { value: "hybrid-sleep", label: "Hybrid sleep" },
+        { value: "hibernate", label: "Hibernate" },
+        { value: "reboot", label: "Restart" },
+        { value: "poweroff", label: "Shut down" }
+    ]
+
+    SettingsSection {
+        visible: page.available
+        title: "Power buttons & lid"
+
+        SettingsRow {
+            icon: "laptop_chromebook"
+            label: "Lid close (on battery)"
+            description: "HandleLidSwitch: lid closed while unplugged"
+            Dropdown {
+                implicitWidth: 170
+                model: page.powerActions
+                value: page.idle.lidAction
+                onActivated: v => page.set("lidAction", v)
+            }
+        }
+
+        SettingsRow {
+            icon: "power"
+            label: "Lid close (plugged in)"
+            description: "HandleLidSwitchExternalPower: lid closed while on AC power"
+            Dropdown {
+                implicitWidth: 170
+                model: page.powerActions
+                value: page.idle.lidExternalPowerAction
+                onActivated: v => page.set("lidExternalPowerAction", v)
+            }
+        }
+
+        SettingsRow {
+            icon: "power_settings_new"
+            label: "Power button press"
+            description: "What happens on a short power button press"
+            Dropdown {
+                implicitWidth: 170
+                model: page.powerActions
+                value: page.idle.powerKeyAction
+                onActivated: v => page.set("powerKeyAction", v)
+            }
+        }
+
+        SettingsRow {
+            icon: "power_settings_new"
+            label: "Power button hold"
+            description: "What happens when the power button is held down"
+            Dropdown {
+                implicitWidth: 170
+                model: page.powerActions
+                value: page.idle.powerKeyLongPressAction
+                onActivated: v => page.set("powerKeyLongPressAction", v)
+            }
+        }
+
+        StyledText {
+            Layout.fillWidth: true
+            Layout.leftMargin: Tokens.space.l
+            Layout.rightMargin: Tokens.space.l
+            Layout.bottomMargin: Tokens.space.m
+            text: "Changes are written to /etc/systemd/logind.conf.d/rice.conf and applied by restarting systemd-logind (asks for your password)."
+            color: Theme.surfaceVariantFg
+            opacity: 0.8
+            font.pixelSize: Tokens.font.s
+            wrapMode: Text.Wrap
+        }
+    }
+
     SettingsSection {
         visible: page.available
         title: "Caffeine"
