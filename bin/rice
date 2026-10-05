@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "${RICE_DOTFILES:-}" ]; then
+    RICE_DOTFILES=$(dirname "$(readlink -f "${XDG_CONFIG_HOME:-$HOME/.config}/hypr")")
+    export RICE_DOTFILES
+fi
+
+exec qs -c rice "$@"

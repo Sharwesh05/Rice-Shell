@@ -33,7 +33,6 @@ hl.env("HYPRCURSOR_SIZE", cursorSize)
 hl.on("hyprland.start", function ()
     hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme " .. cursorTheme)
     hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size " .. cursorSize)
-    hl.exec_cmd("/home/sharwesh/.local/bin/rice")
 end)
 
 -----------------------

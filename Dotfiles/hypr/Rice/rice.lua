@@ -7,17 +7,17 @@
 -- `rice ipc show` lists all targets.
 
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("rice")
     -- Clipboard history for the launcher (SUPER + C).
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
     -- ~/.config/autostart entries (Settings > Autostart).
+    hl.exec_cmd("~/.config/quickshell/rice/bin/rice")
     hl.exec_cmd("dex -a -e Hyprland")
 end)
 
 local mainMod = "SUPER"
 local ipc = function (target, fn)
-    return hl.dsp.exec_cmd("rice ipc call " .. target .. " " .. fn)
+    return hl.dsp.exec_cmd("~/.config/quickshell/rice/bin/rice ipc call " .. target .. " " .. fn)
 end
 
 -- Panels

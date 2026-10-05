@@ -29,7 +29,7 @@ Installed by `../rice.nix` to `/etc/xdg/quickshell/rice`; run as `rice` (`qs -c 
 - [Files, Dotfiles and theming](docs/files-and-theming.md): what is written where, the symlink script, and matugen app theming
 - [Dotfiles/README.md](Dotfiles/README.md): the Dotfiles repo layout
 
-Most-used keys: **Super+/** all keybinds (searchable) · **Super+Space** launcher · **Super+N** sidebar · **Super+A** dashboard · **Super+I** island ·
+Most-used keys: **Super+/** all keybinds (searchable) · **Super+R** launcher · **Super+N** sidebar · **Super+A** dashboard · **Super+I** island ·
 **Super+,** settings · **Super+W** wallpapers · **Super+C** clipboard · **Print** screenshot · **Super+L** lock ·
 **Super+Esc** power menu.
 
